@@ -1,13 +1,12 @@
-class TicketController < ApplicationController
+class TicketsController < ApplicationController
  
   def create
-    @project    = Project.find(params[:project_id])
-    @ticket      = @project.tickets.build(tickets_params)
+    @project = Project.find(params[:project_id])
+    @ticket = @project.tickets.build(tickets_params)
     @ticket.user = current_user
     @ticket.save
  
     redirect_to projects_url
- 
   end	
  
   def destroy
@@ -19,9 +18,8 @@ class TicketController < ApplicationController
  
   private
  
-    # Never trust parameters from the scary internet, only allow the white list through.
   def tickets_params
     params.require(:ticket).permit(:name)
-    end
+  end
  
 end

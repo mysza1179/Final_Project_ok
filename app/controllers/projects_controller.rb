@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @user = current_user
-    @project = @user.questions.build(question_params)
+    @project = @user.projects.build(project_params)
  
     respond_to do |format|
       if @project.save
