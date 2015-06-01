@@ -1,3 +1,5 @@
 <p><%= ticket.name %> 
-  <%= link_to "Delete", project_ticket_path(ticket.project, ticket), method: :delete %>
+  <% if can? :destroy, ticket %>
+    <%= link_to "Delete", project_ticket_path(ticket.project, ticket), method: :delete %>
+  <% end %>
 </p>

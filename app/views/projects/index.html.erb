@@ -1,5 +1,7 @@
-<h1>Forum</h1>
+<h1>Projects</h1>
  
+<%= flash[:alert] %>
+
 <%= link_to 'New Project', new_project_path %>
 <br>
 <br>
@@ -11,11 +13,14 @@
       <h3><%= project.name %></h3>
       <%= time_ago_in_words(project.created_at) %> ago by <%= project.user.email %>
                 <br>
-                
+      
+      <% if can? :update, project %>
       <%= link_to 'Edit', edit_project_path(project) %>
-
+      <% end %>
+      
+      <% if can? :update, project %>
       <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %>
- 
+     	<% end %>
  
       <% if project.tickets.any? %>
               
