@@ -1,29 +1,41 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Projects</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.name %></td>
-        <td><%= project.description %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
+<h1>Forum</h1>
+ 
 <%= link_to 'New Project', new_project_path %>
+<br>
+<br>
+ 
+<% @projects.each do |project| %>
+
+    <div style="border: 1px solid black; background-color: #add8e6;">
+ 
+      <h3><%= project.name %></h3>
+      <%= time_ago_in_words(project.created_at) %> ago by <%= project.user.email %>
+                <br>
+                
+      <%= link_to 'Edit', edit_project_path(project) %>
+
+      <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %>
+ 
+ 
+      <% if project.tickets.any? %>
+              
+                <h4>Tickets</h4>
+                
+      <%= render project.tickets %>
+
+              <% end %>
+ 
+              <hr>
+ 
+              <p>Add Ticket</p>
+ 
+      <%= form_for([project, project.tickets.build]) do |f| %>
+              <%= f.text_area :name %>
+                <%= submit_tag "Add" %>
+              <% end %>
+    </div>
+ 
+    <br>
+    <br>
+ 
+<% end %>
