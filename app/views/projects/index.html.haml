@@ -1,0 +1,46 @@
+.container
+  .row.row-offcanvas.row-offcanvas-right
+    .col-xs-12.col-sm-12
+      %p.pull-right.visible-xs
+        %button.btn.btn-primary.btn-xs{"data-toggle" => "offcanvas", :type => "button"} Toggle nav
+      .jumbotron
+        %h1 Projects page
+        %p Here you can find your projects.
+        %p= link_to 'New project', new_project_path, :class => 'btn btn-primary'
+      - @projects.each do |project|
+        .panel.panel-default
+          / Default panel contents
+          .panel-heading
+            = project.name
+          = link_to 'Edit', edit_project_path(project), :class => 'btn btn-default pull-right'
+          = link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger pull-right'
+          .row
+            .col-xs-6.col-lg-4
+              .panel-body
+                %p= project.description
+                %td
+                  %br/
+                  = form_for([project, project.tickets.build]) do |f|
+                    %form.form-inline
+                      .form-group.pull-left
+                        %label{:for => "InputName "} Name
+                        %br/
+                        = f.text_field :name
+                        %br/
+                        %label{:for => "InputDescription"} Description
+                        %br/
+                        = f.text_field :description
+                        %br/
+                        %label{:for => "InputDifficulty"} Difficulty
+                        %br/
+                        = f.text_field :difficulty
+                        %br/
+                        %label{:for => "InputStatus"} Status
+                        %br/
+                        = f.text_field :status
+                        %br/
+                        %br/
+                        = submit_tag "Add", :class => 'btn btn-default pull-left'
+                        %br/
+          - if project.tickets.any?
+            = render project.tickets

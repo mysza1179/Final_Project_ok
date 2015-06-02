@@ -1,0 +1,34 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    / The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "", :name => "author"}/
+    %link{:href => "../../favicon.ico", :rel => "icon"}/
+    %title Off Canvas Template for Bootstrap
+    / Bootstrap core CSS
+    %link{:href => "../../dist/css/bootstrap.min.css", :rel => "stylesheet"}/
+    / Custom styles for this template
+    %link{:href => "offcanvas.css", :rel => "stylesheet"}/
+  %body
+    .container
+      .row.row-offcanvas.row-offcanvas-right
+        .col-sm-12
+          %p.pull-right.visible-xs
+            %button.btn.btn-primary.btn-xs{"data-toggle" => "offcanvas", :type => "button"} Toggle nav
+          .jumbotron
+            %h1 Create your project here!
+            %p This site is a perfect place to start your project.
+      /
+        Bootstrap core JavaScript
+        \==================================================
+      / Placed at the end of the document so the pages load faster
+      %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"}
+      %script{:src => "../../dist/js/bootstrap.min.js"}
+      / IE10 viewport hack for Surface/desktop Windows 8 bug
+      %script{:src => "../../assets/js/ie10-viewport-bug-workaround.js"}
+      %script{:src => "offcanvas.js"}
