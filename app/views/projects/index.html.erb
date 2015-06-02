@@ -8,39 +8,30 @@
  
 <% @projects.each do |project| %>
 
-    <div style="border: 1px solid black; background-color: #add8e6;">
- 
-      <h3><%= project.name %></h3>
-      <%= time_ago_in_words(project.created_at) %> ago by <%= project.user.email %>
-                <br>
-      
-      <% if can? :update, project %>
-      <%= link_to 'Edit', edit_project_path(project) %>
-      <% end %>
-      
-      <% if can? :update, project %>
-      <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %>
-     	<% end %>
- 
-      <% if project.tickets.any? %>
-              
-                <h4>Tickets</h4>
-                
-      <%= render project.tickets %>
-
-              <% end %>
- 
-              <hr>
- 
-              <p>Add Ticket</p>
- 
-      <%= form_for([project, project.tickets.build]) do |f| %>
-              <%= f.text_area :name %>
-                <%= submit_tag "Add" %>
-              <% end %>
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" aria-expanded="false">
+          <%= project.name %>
+          
+          <% if can? :update, project %>
+          <button type="button" class="btn btn-default navbar-btn btn pull-right"><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %>             </button>
+     	    <% end %>
+          
+        </a>
+      </h4>
     </div>
- 
-    <br>
-    <br>
- 
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        <%= project.description %>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
 <% end %>
