@@ -1,5 +1,15 @@
-<p><%= ticket.name %> 
-  <% if can? :destroy, ticket %>
-    <%= link_to "Delete", project_ticket_path(ticket.project, ticket), method: :delete %>
-  <% end %>
-</p>
+<div class="row">
+  <div class="col-xs-6 col-lg-4">
+    <h2><%= ticket.name %></h2>
+      <p><%= ticket.description %></p>
+      <label for="InputDifficulty">Difficulty: </label>
+      <p><%= ticket.difficulty %></p>
+      <label for="InputDifficulty">Status: </label>
+      <p><%= ticket.status %></p>
+    
+    
+    <% if can? :destroy, ticket %>
+     <p><%= link_to "Delete", project_ticket_path(ticket.project, ticket), method: :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %></p>
+     <% end %>
+   </div>
+</div>

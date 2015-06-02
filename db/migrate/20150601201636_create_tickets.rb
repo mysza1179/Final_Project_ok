@@ -3,8 +3,8 @@ class CreateTickets < ActiveRecord::Migration
     create_table :tickets do |t|
       t.string :name
       t.text :description
-      t.integer :difficulty
-      t.integer :status
+      t.string :difficulty
+      t.string :status
       
       t.integer :project_id
       t.integer :user_id

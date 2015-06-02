@@ -1,0 +1,15 @@
+<nav class="navbar navbar-default navbar-fixed-top" >
+  <div class="container">
+    <a class="navbar-brand" href="/">Final Project</a>
+  
+    <% if user_signed_in? %>
+  <p class="navbar-text pull-left">Welcome, <%= current_user.name %> <%= current_user.lastname %></p>
+      <%= link_to "Log out", destroy_user_session_path, method: :delete, :class => 'btn btn-default navbar-btn btn pull-right' %>
+    <% else %>
+      <%= link_to "Sign In", new_user_session_path, :class => 'btn btn-primary btn pull-right navbar-btn' %>
+      <%= link_to "Sign Out", new_user_registration_path, :class => 'btn btn-default btn pull-right navbar-btn' %>
+  <% end %>
+    
+  </div>
+</nav>
+  

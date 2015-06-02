@@ -1,37 +1,52 @@
-<h1>Projects</h1>
- 
-<%= flash[:alert] %>
+<div class="container">
 
-<%= link_to 'New Project', new_project_path %>
-<br>
-<br>
- 
-<% @projects.each do |project| %>
+      <div class="row row-offcanvas row-offcanvas-right">
 
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingOne">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" aria-expanded="false">
-          <%= project.name %>
+        <div class="col-xs-12 col-sm-12">
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+          <div class="jumbotron">
+            <h1>Projects page</h1>
+            <p>Here you can find your projects.</p>
+            <p><%= link_to 'New project', new_project_path, :class => 'btn btn-primary' %></p>
+          </div>
           
-          <% if can? :update, project %>
-          <button type="button" class="btn btn-default navbar-btn btn pull-right"><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %>             </button>
-     	    <% end %>
-          
-        </a>
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-      <div class="panel-body">
-        <%= project.description %>
-      </div>
-    </div>
-  </div>
-
-
-
-
-
-
-<% end %>
+          <% @projects.each do |project| %>
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><%= project.name %> </div>
+                <%= link_to 'Edit', edit_project_path(project), :class => 'btn btn-default pull-right' %>
+                <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger pull-right' %>
+            
+            <div class="row">
+            <div class="col-xs-6 col-lg-4">
+            <div class="panel-body"> 
+              <p><%= project.description %></p>
+              <td><br>
+                <%= form_for([project, project.tickets.build]) do |f| %>
+                <form class="form-inline">
+                  <div class="form-group pull-left">
+                    <label for="InputName ">Name</label>
+                    <br><%= f.text_field :name %><br>
+                    <label for="InputDescription">Description</label>
+                    <br><%= f.text_field :description %><br>
+                    <label for="InputDifficulty">Difficulty</label>
+                    <br><%= f.text_field :difficulty %><br>
+                    <label for="InputStatus">Status</label>
+                    <br><%= f.text_field :status %><br>
+                  <br><%= submit_tag "Add", :class => 'btn btn-default pull-left' %><br>
+                  <% end %>
+                  </div>
+                </form>
+              </td>
+              </div>
+              </div>
+            </div>
+            
+            
+            
+           <% if project.tickets.any? %>
+             <%= render project.tickets %>
+           <% end %>     
+        <% end %>         

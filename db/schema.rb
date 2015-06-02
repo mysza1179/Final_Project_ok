@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 20150601201636) do
   create_table "tickets", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "difficulty"
-    t.integer  "status"
+    t.string   "difficulty"
+    t.string   "status"
     t.integer  "project_id"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
